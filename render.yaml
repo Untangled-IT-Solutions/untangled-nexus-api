@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: untangled-nexus-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.8"
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        value: "*"
+      - key: DASHBOARD_CACHE_MS
+        value: "15000"
