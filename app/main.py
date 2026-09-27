@@ -18,6 +18,7 @@ from app.routers import (
     approvals,
     quotes,
     employees,
+    products,
 )
 
 
@@ -52,7 +53,6 @@ async def timing_middleware(request: Request, call_next):
     started = time.perf_counter()
     response = await call_next(request)
     duration_ms = (time.perf_counter() - started) * 1000
-    # Log real path (not "/") so Render logs are useful
     print(
         {
             "method": request.method,
@@ -74,3 +74,4 @@ app.include_router(tasks.router)
 app.include_router(approvals.router)
 app.include_router(quotes.router)
 app.include_router(employees.router)
+app.include_router(products.router)
